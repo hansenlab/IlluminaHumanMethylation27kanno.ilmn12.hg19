@@ -1,0 +1,13 @@
+Package: IlluminaHumanMethylation27kanno.ilmn12.hg19
+Version: 0.1.0
+Title: Annotation for Illumina's 27k methylation arrays
+Description: An annotation package for Illumina's EPIC methylation arrays.
+Authors@R: c(person("Jean-Philippe", "Fortin", role = c("cre", "aut"),
+                    email = "jfortin@jhsph.edu"),
+             person(c("Kasper", "Daniel"), "Hansen", role = "aut"))
+Maintainer: Kasper Daniel Hansen <kasperdanielhansen@gmail.com>
+License: Artistic-2.0
+Depends: R (>= 3.2.0), minfi
+LazyData: yes
+biocViews: IlluminaChip, Homo_sapiens, DNAMethylation
+NeedsCompilation: no
