@@ -7,7 +7,7 @@ Authors@R: c(person("Jean-Philippe", "Fortin", role = c("cre", "aut"),
              person(c("Kasper", "Daniel"), "Hansen", role = "aut"))
 Maintainer: Kasper Daniel Hansen <kasperdanielhansen@gmail.com>
 License: Artistic-2.0
-Depends: R (>= 3.2.0), minfi
+Depends: R (>= 3.3.0), minfi
 LazyData: yes
 biocViews: IlluminaChip, Homo_sapiens, DNAMethylation
 NeedsCompilation: no
