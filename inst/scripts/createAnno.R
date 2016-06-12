@@ -1,8 +1,17 @@
 library(minfi)
-manifestFile <- "../../../files_27k/humanmethylation27_270596_v1-2.csv"
+manifestFile <- "../../../files_27k/HumanMethylation27_270596_v.1.2.bpm"
 maniTmp <- minfi:::read.manifest.27k(manifestFile)
 anno <- maniTmp$manifest
 manifestList <- maniTmp$manifestList
+
+# Adding colors to Type I SNP probes as discovered experimentally by Tim Triche:
+manifestList$TypeSnpI[match(
+        c("rs1019916", "rs10457834", "rs1416770", "rs1941955", "rs2125573", 
+        "rs2235751", "rs2521373", "rs264581", "rs2804694", "rs2959823", 
+        "rs5931272", "rs6546473", "rs739259", "rs798149", "rs845016", 
+        "rs866884"), manifestList$TypeSnpI$Name), "Color"] <- 
+        c("Red", "Red", "Red", "Red", "Red", "Grn", "Grn", "Red", "Red", 
+        "Red", "Red", "Grn", "Red", "Grn", "Grn", "Red")
 
 ## Manifest package
 IlluminaHumanMethylation27kmanifest <- do.call(IlluminaMethylationManifest,
@@ -28,11 +37,11 @@ anno <- anno[getManifestInfo(IlluminaHumanMethylation27kmanifest, type = "locusN
 anno$Type <- rep("I", nrow(anno))
 
 
-Locations <- anno[, c("Chr", "MAPINFO")]
+Locations <- anno[, c("Chr", "MapInfo")]
 names(Locations) <- c("chr", "pos")
 Locations$pos <- as.integer(Locations$pos)
 Locations$chr <- paste("chr", Locations$chr, sep = "")
-Locations$strand <- ifelse(anno$strand == "F", "+", "-")
+Locations$strand <- ifelse(anno$strand == "TOP", "+", "-")
 table(Locations$chr, exclude = NULL)
 rownames(Locations) <- anno$Name
 Locations <- as(Locations, "DataFrame")
@@ -41,7 +50,7 @@ Manifest <- anno[, c("Name", "AddressA", "AddressB",
                      "ProbeSeqA", "ProbeSeqB", "Type", "NextBase", "Color")]
 Manifest <- as(Manifest, "DataFrame")
 
-usedColumns <- c(names(Manifest), names(SNPs.Illumina), 
+usedColumns <- c(names(Manifest), 
                  c("CHR", "MAPINFO", "Strand",
                    "Chromosome_36", "Coordinate_36", "Genome_Build"),
                  c("UCSC_CpG_Islands_Name", "Relation_to_UCSC_CpG_Island"))
@@ -61,7 +70,7 @@ Other <- as(Other, "DataFrame")
 map <- cbind(Locations, Manifest)
 map <- GRanges(seqnames = map$chr, ranges = IRanges(start = map$pos, width = 1),
                Strand = map$strand, Type = map$Type)
-map <- minfi:::getProbePositionsDetailed(map)
+map <- minfi:::.getProbePositionsDetailed(map)
 names(map) <- rownames(Locations)
 
 ## dbSNP
@@ -89,9 +98,7 @@ defaults <- c("Locations", "Manifest",
 annoObj <-
     IlluminaMethylationAnnotation(list(Locations = Locations,
                                        Manifest = Manifest,
-                                       #Islands.UCSC = Islands.UCSC,
                                        Other = Other,
-                                       #SNPs.Illumina = SNPs.Illumina,
                                        SNPs.146CommonSingle = SNPs.146CommonSingle,
                                        SNPs.144CommonSingle = SNPs.144CommonSingle,
                                        SNPs.142CommonSingle = SNPs.142CommonSingle,
@@ -107,4 +114,3 @@ cat("creating object:", annoName, "\n")
 assign(annoName, annoObj)
 save(list = annoName,
      file = file.path("../../data",paste(annoName, "rda", sep = ".")), compress = "xz")
-
