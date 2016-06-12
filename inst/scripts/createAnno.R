@@ -50,16 +50,14 @@ Manifest <- anno[, c("Name", "AddressA", "AddressB",
                      "ProbeSeqA", "ProbeSeqB", "Type", "NextBase", "Color")]
 Manifest <- as(Manifest, "DataFrame")
 
+
 usedColumns <- c(names(Manifest), 
-                 c("CHR", "MAPINFO", "Strand",
-                   "Chromosome_36", "Coordinate_36", "Genome_Build"),
-                 c("UCSC_CpG_Islands_Name", "Relation_to_UCSC_CpG_Island"))
-usedColumns <- c(names(Manifest), 
-                 c("CHR", "MAPINFO", "Strand"))
+                 c("Chr", "MapInfo", "Strand"))
 Other <- anno[, setdiff(names(anno), usedColumns)]
 nam <- names(Other)
 Other <- as(Other, "DataFrame")
-
+Other[,"X"] <- NULL
+Other[,"X.1"] <- NULL
 ## We now use an exisitng grSnp object containing a GRanges of relevant SNPs.
 ## This is created in a separate script
 
