@@ -36,7 +36,3 @@ save(grSnp141CommonSingle, file = "extdata/grSnp141CommonSingle.rda")
 
 grSnp138CommonSingle <- processUCSCsnp("extdata/snp138Common_small.txt.gz")
 save(grSnp138CommonSingle, file = "extdata/grSnp138CommonSingle.rda")
-
-
-
-

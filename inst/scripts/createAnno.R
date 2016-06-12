@@ -17,7 +17,7 @@ anno$IlmnID <- NULL
 nam <- names(anno)
 names(nam) <- nam
 nam[c("AddressA_ID", "AddressB_ID", "AlleleA_ProbeSeq", "AlleleB_ProbeSeq",
-            "Next_Base", "Color_Channel", "IlmnStrand")] <-  c("AddressA", "AddressB",
+"Next_Base", "Color_Channel", "IlmnStrand")] <-  c("AddressA", "AddressB",
                                                                          "ProbeSeqA", "ProbeSeqB",
                                                                          "NextBase", "Color", "strand")
 
@@ -40,15 +40,6 @@ Locations <- as(Locations, "DataFrame")
 Manifest <- anno[, c("Name", "AddressA", "AddressB",
                      "ProbeSeqA", "ProbeSeqB", "Type", "NextBase", "Color")]
 Manifest <- as(Manifest, "DataFrame")
-
-#Islands.UCSC <- anno[, c("UCSC_CpG_Islands_Name", "Relation_to_UCSC_CpG_Island")]
-#names(Islands.UCSC) <- c("Islands_Name", "Relation_to_Island")
-#Islands.UCSC <- as(Islands.UCSC, "DataFrame")
-#Islands.UCSC$Relation_to_Island[Islands.UCSC$Relation_to_Island == ""] <- "OpenSea"
-#table(Islands.UCSC$Relation_to_Island, exclude = NULL)
-
-#SNPs.Illumina <- anno[, c("SNP_ID", "SNP_DISTANCE", "SNP_MinorAlleleFrequency")]
-#SNPs.Illumina <- as(SNPs.Illumina, "DataFrame")
 
 usedColumns <- c(names(Manifest), names(SNPs.Illumina), 
                  c("CHR", "MAPINFO", "Strand",
