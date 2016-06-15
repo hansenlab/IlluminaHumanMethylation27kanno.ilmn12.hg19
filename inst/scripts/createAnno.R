@@ -1,5 +1,10 @@
 library(minfi)
-manifestFile <- "../../../files_27k/HumanMethylation27_270596_v.1.2.bpm"
+manifestFile <- "../../../IlluminaHumanMethylation27k_files/data/HumanMethylation27_270596_v.1.2.bpm"
+if(!file.exists(manifestFile) || !file.exists("extdata")) {
+    cat("Missing files, quitting\n")
+    q(save = "no")
+}
+
 maniTmp <- minfi:::read.manifest.27k(manifestFile)
 anno <- maniTmp$manifest
 manifestList <- maniTmp$manifestList
@@ -82,6 +87,12 @@ load("extdata/grSnp141CommonSingle.rda")
 SNPs.141CommonSingle <- minfi:::.doSnpOverlap(map, grSnp141CommonSingle)
 load("extdata/grSnp138CommonSingle.rda")
 SNPs.138CommonSingle <- minfi:::.doSnpOverlap(map, grSnp138CommonSingle)
+load("extdata/grSnp137CommonSingle.rda")
+SNPs.137CommonSingle <- minfi:::.doSnpOverlap(map, grSnp137CommonSingle)
+load("extdata/grSnp135CommonSingle.rda")
+SNPs.135CommonSingle <- minfi:::.doSnpOverlap(map, grSnp135CommonSingle)
+load("extdata/grSnp132CommonSingle.rda")
+SNPs.132CommonSingle <- minfi:::.doSnpOverlap(map, grSnp132CommonSingle)
 
 
 annoStr <- c(array = "IlluminaHumanMethylation27k",
@@ -101,7 +112,10 @@ annoObj <-
                                        SNPs.144CommonSingle = SNPs.144CommonSingle,
                                        SNPs.142CommonSingle = SNPs.142CommonSingle,
                                        SNPs.141CommonSingle = SNPs.141CommonSingle,
-                                       SNPs.138CommonSingle = SNPs.138CommonSingle
+                                       SNPs.138CommonSingle = SNPs.138CommonSingle,
+                                       SNPs.137CommonSingle = SNPs.137CommonSingle,
+                                       SNPs.135CommonSingle = SNPs.135CommonSingle,
+                                       SNPs.132CommonSingle = SNPs.132CommonSingle
                                        ),
                                   annotation = annoStr, defaults = defaults)
 validObject(annoObj)
@@ -112,3 +126,7 @@ cat("creating object:", annoName, "\n")
 assign(annoName, annoObj)
 save(list = annoName,
      file = file.path("../../data",paste(annoName, "rda", sep = ".")), compress = "xz")
+
+sessionInfo()
+q(save = "no")
+

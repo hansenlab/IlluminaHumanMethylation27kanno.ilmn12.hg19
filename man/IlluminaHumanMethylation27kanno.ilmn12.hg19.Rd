@@ -28,7 +28,7 @@
 
   In addition to the SNP information provided by Illumina, we have added
   independent information on the overlap of the 27k with various
-  versions of dbSNP (146, 144, 142, 141, and 138).  The overlap is based on the
+  versions of dbSNP.  The overlap is based on the
   mappings of the 27k loci to the hg19 genome provided by Illumina.  As
   dbSNP we have used the \sQuote{Common} table from UCSC
   (ie. \sQuote{snp138Common}).  This track contains variants from dbSNP
