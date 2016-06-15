@@ -7,4 +7,4 @@ Maintainer: Kasper Daniel Hansen <kasperdanielhansen@gmail.com>
 License: Artistic-2.0
 Depends: R (>= 3.3.0), minfi (>= 1.19.4)
 LazyData: yes
-biocViews: IlluminaChip, Homo_sapiens, DNAMethylation
+biocViews: AnnotationData, IlluminaChip, Homo_sapiens
