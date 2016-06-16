@@ -3,8 +3,8 @@
 \encoding{UTF-8}
 
 
-\section{Version 0.1}{
+\section{Version 0.5.0}{
   \itemize{
-    \item Initial release to Bioconductor.
+    \item Initial release.
   }
 }
