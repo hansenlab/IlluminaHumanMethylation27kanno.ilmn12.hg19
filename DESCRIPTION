@@ -1,5 +1,5 @@
 Package: IlluminaHumanMethylation27kanno.ilmn12.hg19
-Version: 0.5.0
+Version: 0.5.1
 Title: Annotation for Illumina's 27k methylation arrays
 Description: An annotation package for Illumina's EPIC methylation arrays.
 Author: Jean-Philippe Fortin, Kasper Daniel Hansen

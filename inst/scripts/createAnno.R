@@ -99,10 +99,8 @@ annoStr <- c(array = "IlluminaHumanMethylation27k",
              annotation = "ilmn12",
              genomeBuild = "hg19")
 defaults <- c("Locations", "Manifest",
-              "SNPs.146CommonSingle", 
-              "Islands.UCSC", "Other")
-defaults <- c("Locations", "Manifest",
-              "SNPs.146CommonSingle", "Other")
+              "SNPs.137CommonSingle", 
+              "Other")
 
 annoObj <-
     IlluminaMethylationAnnotation(list(Locations = Locations,

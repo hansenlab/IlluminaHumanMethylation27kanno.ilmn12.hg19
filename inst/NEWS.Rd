@@ -3,8 +3,9 @@
 \encoding{UTF-8}
 
 
-\section{Version 0.5.0}{
+\section{Version 0.5.x}{
   \itemize{
     \item Initial release.
+    \item CHanged default SNP database to dbSNP 137 because of backwards compability.
   }
 }
