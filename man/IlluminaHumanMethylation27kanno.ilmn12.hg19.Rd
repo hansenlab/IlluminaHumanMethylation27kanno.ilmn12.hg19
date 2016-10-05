@@ -1,5 +1,8 @@
 \name{IlluminaHumanMethylation27kanno.ilmn12.hg19}
 \alias{IlluminaHumanMethylation27kanno.ilmn12.hg19}
+\alias{Locations}
+\alias{Other}
+\alias{Manifest}
 \docType{data}
 \title{
   Annotation data for the \sQuote{IlluminaHumanMethylation27k} micro array.
@@ -14,9 +17,10 @@
   A script for creating the data object in this package is contained in
   \code{scripts/manifest.R}.
 }
-\usage{data(IlluminaHumanMethylation27kanno.ilmn12.hg19)}
 \format{
-  An object of class \code{IlluminaMethylationAnnotation}.
+  An object of class \code{IlluminaMethylationAnnotation} for
+  \code{IlluminaHumanMethylation27kanno.ilmn12.hg19}. All others are of
+  class \code{DataFrame}
 }
 \details{
   The following changes/ modifications / addition has been made to the
@@ -26,24 +30,8 @@
   additional SNP information (see below) is contained in the
   \code{createAnno.R} script in the \code{scripts} directory.
 
-  In addition to the SNP information provided by Illumina, we have added
-  independent information on the overlap of the 27k with various
-  versions of dbSNP.  The overlap is based on the
-  mappings of the 27k loci to the hg19 genome provided by Illumina.  As
-  dbSNP we have used the \sQuote{Common} table from UCSC
-  (ie. \sQuote{snp138Common}).  This track contains variants from dbSNP
-  which have a minor allele frequency (MAF) of greater than 1 percent
-  (specifically, this requires dbSNP to actually contain MAF
-  information).  Furthermore, we only kept variants marked as
-  \sQuote{single} (ie. standard single nucleotide changes, but not
-  insertions or deletions).  Scripts for retrieving the UCSC dbSNP table
-  and doing the overlap are contained in the \code{scripts} directory.
-  The variants are described in 6 different columns. \code{Probe_rs}
-  tells us the RS number (SNP ID number) for a SNP overlapping the
-  probe, and \code{Probe_maf} is the minor allelle frequency for the SNP
-  (in case multiple SNPs overlap, only one is recorded).  Similarly,
-  \code{CpG_rs} describe SNPs overlapping the CpG site and \code{SBE_rs}
-  the single base extension of the measured methylation loci.
+  Contents of the columns are the responsibility of Illumina; see their
+  documentation for details.
 }
 
 \source{
@@ -51,6 +39,9 @@
 }
 
 \examples{
-  data(IlluminaHumanMethylation27kanno.ilmn12.hg19)
+data(IlluminaHumanMethylation27kanno.ilmn12.hg19)
+data(Locations)
+data(Other)
+data(Manifest)
 }
 \keyword{datasets}
