@@ -77,6 +77,8 @@ map <- minfi:::.getProbePositionsDetailed(map)
 names(map) <- rownames(Locations)
 
 ## dbSNP
+load("extdata/grSnp147CommonSingle.rda")
+SNPs.147CommonSingle <- minfi:::.doSnpOverlap(map, grSnp147CommonSingle)
 load("extdata/grSnp146CommonSingle.rda")
 SNPs.146CommonSingle <- minfi:::.doSnpOverlap(map, grSnp146CommonSingle)
 load("extdata/grSnp144CommonSingle.rda")
@@ -95,36 +97,26 @@ load("extdata/grSnp132CommonSingle.rda")
 SNPs.132CommonSingle <- minfi:::.doSnpOverlap(map, grSnp132CommonSingle)
 
 
+annoNames <- c("Locations", "Manifest", "SNPs.147CommonSingle", "SNPs.146CommonSingle",
+               "SNPs.144CommonSingle", "SNPs.142CommonSingle", "SNPs.141CommonSingle",
+               "SNPs.138CommonSingle", "SNPs.137CommonSingle", "SNPs.135CommonSingle",
+               "SNPs.132CommonSingle", "Other")
+for(nam in annoNames) {
+    cat(nam, "\n")
+    save(list = nam, file = file.path("../../data", paste(nam, "rda", sep = ".")), compress = "xz")
+}
 annoStr <- c(array = "IlluminaHumanMethylation27k",
              annotation = "ilmn12",
              genomeBuild = "hg19")
-defaults <- c("Locations", "Manifest",
-              "SNPs.137CommonSingle", 
-              "Other")
-
-annoObj <-
-    IlluminaMethylationAnnotation(list(Locations = Locations,
-                                       Manifest = Manifest,
-                                       Other = Other,
-                                       SNPs.146CommonSingle = SNPs.146CommonSingle,
-                                       SNPs.144CommonSingle = SNPs.144CommonSingle,
-                                       SNPs.142CommonSingle = SNPs.142CommonSingle,
-                                       SNPs.141CommonSingle = SNPs.141CommonSingle,
-                                       SNPs.138CommonSingle = SNPs.138CommonSingle,
-                                       SNPs.137CommonSingle = SNPs.137CommonSingle,
-                                       SNPs.135CommonSingle = SNPs.135CommonSingle,
-                                       SNPs.132CommonSingle = SNPs.132CommonSingle
-                                       ),
-                                  annotation = annoStr, defaults = defaults)
-validObject(annoObj)
-
-annoName <- sprintf("%sanno.%s.%s", annoStr["array"], annoStr["annotation"],
+defaults <- c("Locations", "Manifest", "SNPs.137CommonSingle", "Other")
+pkgName <- sprintf("%sanno.%s.%s", annoStr["array"], annoStr["annotation"],
                     annoStr["genomeBuild"])
-cat("creating object:", annoName, "\n")
-assign(annoName, annoObj)
-save(list = annoName,
-     file = file.path("../../data",paste(annoName, "rda", sep = ".")), compress = "xz")
 
+annoObj <- IlluminaMethylationAnnotation(objectNames = annoNames, annotation = annoStr,
+                              defaults = defaults, packageName = pkgName)
+
+assign(pkgName, annoObj)
+save(list = pkgName,
+     file = file.path("../../data", paste(pkgName, "rda", sep = ".")), compress = "xz")
 sessionInfo()
 q(save = "no")
-
